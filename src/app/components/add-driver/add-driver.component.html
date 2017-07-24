@@ -1,0 +1,60 @@
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" (click)="openModal(form, null)"><i class="material-icons">add</i></a>
+</div>
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+  <form #form="ngForm" (submit)="saveDriver(form, driver?.key)">
+    <div class="modal-content">
+      <h5>DRIVER CARD</h5>
+      <div class="row">
+        <div class="col s2 hoverable">
+          <img class="responsive-img" src="{{car?.imgUrl || '/assets/img/guest-256.png'}}">
+        </div>
+        <div class="col s10">
+          <div class="row">
+            <div class="col s4">
+              <label for="first-name">FIRST NAME<span class="red-text"> *</span></label>
+              <input required id="first-name" type="text" [ngModel]="driver?.firstName" name="firstName">
+            </div>
+            <div class="col s4">
+              <label for="last-name">LAST NAME<span class="red-text"> *</span></label>
+              <input required id="last-name" type="text" [ngModel]="driver?.lastName" name="lastName">
+            </div>
+            <div class="col s4">
+              <label for="fathers-name">FATHER's NAME</label>
+              <input id="fathers-name" type="text" [ngModel]="driver?.fathersName" name="fathersName">
+            </div>
+          </div>
+          <div class="col s4">
+            <label for="birthdate">BIRTH DATE<span class="red-text"> *</span></label>
+            <input required materialize="pickadate" id="birthdate" [materializeParams]="[{ selectMonths: true,  selectYears: 100}]" [ngModel]="driver?.birthdate" name="birthdate">
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <h6>CONTACTS</h6>
+        <div class="row">
+          <div class="input-field col s4">
+            <i class="material-icons prefix">phone</i>
+            <input required id="phone" placeholder="+380987654321" type="text" [ngModel]="driver?.phone" name="phone">
+            <label for="phone"><span class="red-text"> *</span></label>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col s6">
+            <div *ngIf="driver" class=" valign-wrapper">
+              <i class="material-icons red-text delete-icon" (click)="deleteDriver(driver)">delete</i>
+            </div>
+          </div>
+        <div class="col s6">
+          <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" [class.disabled]="!form.valid">Save</button>
+          <button class="waves-effect waves-green btn-flat" type="button" (click)="closeModal()">Close</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

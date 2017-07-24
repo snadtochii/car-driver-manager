@@ -1,0 +1,32 @@
+<app-add-driver #modalEditDriver></app-add-driver>
+<div class="row">
+  <div class="input-field col s12">
+    <i class="material-icons prefix">search</i>
+    <input type="text" id="search-drivers" placeholder="Search the drivers" #searchDrivers (keyup)="filterDrivers(searchDrivers.value)">
+  </div>
+  <div class="col" [ngClass]="{s12: !selectedDriver, s8: selectedDriver}">
+    <table class="bordered highlight">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Account balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of driversFiltered" (click)="selectedDriver=driver; shareDriver(driver)" [class.active]="driver === selectedDriver">
+          <td>{{driver.$key}}</td>
+          <td>
+            {{driver.firstName}} 
+            {{driver.fathersName}}
+            {{driver.lastName}}
+          </td>
+          <td>{{driver.status}}</td>
+          <td>{{driver.accountBalance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-driver-details [mod]="modalEditDriver"></app-driver-details>
+</div>

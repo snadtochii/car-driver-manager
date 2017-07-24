@@ -1,0 +1,45 @@
+<div *ngIf="driver" class="col s4">
+  <div class="card">
+    <div class="card-stacked">
+      <div class="card-content">
+        <i class="material-icons teal-text modal-trigger editable" (click)="mod.openModal(null, driver)">mode_edit</i>
+        <i class="material-icons right red-text editable" (click)="deleteDriver(driver)">delete</i>
+        <div class="row">
+          <div class="col s12 m6 l4">
+            <img class="responsive-img" src="{{driver?.imgUrl || '/assets/img/guest-256.png'}}">
+          </div>
+          <div class="col s12 m6 l8">
+            <p>{{driver.firstName}} {{driver.fathersName}}</p>
+            <p>{{driver.lastName}}</p>
+            <p>{{driver.color}}</p>
+            <p>{{driver.regNumber}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col s12">
+            <h6>CONTACTS</h6>
+            <div class="valign-wrapper"><i class="material-icons phone-icon valign-center">phone</i><span>{{driver.phone}}</span></div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col s12">
+            Cars:
+            <div *ngFor="let car of carsOfDriver" class="chip">
+              {{car.brand}} {{car.model}} - {{car.regNumber}}
+              <i class="material-icons close" (click)="deleteCar(driver, car.$key)">close</i>
+            </div>
+            <div>
+              <select required materialize="material_select" [materializeSelectOptions]="cars" #selectedCar name="car">
+                <option value="" selected>Choose car</option>
+                <option *ngFor="let car of cars" [value]="car.$key">{{car.brand}} {{car.model}}- {{car.regNumber}}</option>
+              </select>
+              <button class="btn" (click)="addCar(driver, selectedCar.value)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

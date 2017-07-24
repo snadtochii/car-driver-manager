@@ -1,0 +1,30 @@
+<app-add-car #modalEditCar></app-add-car>
+<div class="row">
+  <div class="input-field col s12">
+    <i class="material-icons prefix">search</i>
+    <input type="text" id="search-cars" placeholder="Search the car" #searchCars (keyup)="filterCars(searchCars.value)">
+  </div>
+  <div class="col" [ngClass]="{s12: !selectedCar, s8: selectedCar}">
+    <table class="bordered highlight">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Color</th>
+          <th>Regisrtation number</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of carsFiltered" (click)="selectedCar=car; shareCar(car)" [class.active]="car === selectedCar">
+          <td>{{car.brand}}</td>
+          <td>{{car.model}}</td>
+          <td>{{car.color}}</td>
+          <td>{{car.regNumber}}</td>
+          <td>{{car.location}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-car-details [mod]="modalEditCar"></app-car-details>
+</div>

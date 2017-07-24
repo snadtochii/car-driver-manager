@@ -1,0 +1,43 @@
+<div *ngIf="car" class="col s4">
+  <div class="card">
+    <div class="card-stacked">
+      <div class="card-content">
+        <i class="material-icons teal-text editable" (click)="mod.openModal(null, car)">mode_edit</i>
+        <i class="material-icons right red-text editable" (click)="deleteCar(car)">delete</i>
+        <div class="row">
+          <div class="col s12 m6 l4">
+            <img class="responsive-img" src="{{car?.imgUrl || '/assets/img/car-256.png'}}">
+          </div>
+          <div class="col s12 m6 l8">
+            <p>{{car.brand}}</p>
+            <p>{{car.model}}</p>
+            <p>{{car.color}}</p>
+            <p>{{car.regNumber}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col s12">
+            Located at:
+            <p>{{car.location}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col s12">
+            Drivers:
+            <div *ngFor="let driver of driversOfCar" class="chip">
+              {{driver.firstName}} {{driver.lastName}}
+              <i class="material-icons close" (click)="deleteDriver(car, driver.$key)">close</i>
+            </div>
+            <select required materialize="material_select" #selectedDriver name="driver">
+                <option value="" selected>Choose driver</option>
+                <option *ngFor="let driver of drivers" [value]="driver.$key">{{driver.firstName}} - {{driver.lastName}}</option>
+              </select>
+            <button class="btn" (click)="addDriver(car, selectedDriver.value)">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+.modal{
+    max-height: 100%;
+}
+.delete-icon{
+    font-size: 3rem;
+    cursor: pointer;
+}
