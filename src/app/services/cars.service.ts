@@ -14,12 +14,10 @@ export class CarsService {
 
   constructor(private http: Http, private afd: AngularFireDatabase) { }
 
-  getCars() {
+  getCars(): Observable<any> {
     return this.afd.list('/cars');
-    // return this.http.get(environment.firebase.databaseURL + '/cars.json');
   }
   addCar(car: Car): Observable<any> {
-    // this.afd.list('/cars').push(car)
     return this.http.post(this.dbUrl + '/cars.json', car);
   }
   deleteCar(car) {
@@ -27,7 +25,7 @@ export class CarsService {
     let driverKeys = car.drivers;
     let carKey = car.$key;
 
-    return this.http.delete(this.dbUrl + '/cars/' + carKey + '.json').subscribe(() => {
+    this.http.delete(this.dbUrl + '/cars/' + carKey + '.json').subscribe(() => {
       let tasks$ = [];
       for (var key in driverKeys) {
         if (driverKeys.hasOwnProperty(key)) {
