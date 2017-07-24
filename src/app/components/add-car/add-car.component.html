@@ -34,11 +34,11 @@
               <label>COLOR <span class="red-text">*</span></label>
             </div>
           </div>
-          <div class="col s3">
+          <div class="input-container col s3">
             <label for="reg-number">REGISTRATION NUMBER <span class="red-text">*</span></label>
             <input required id="reg-number" type="text" [ngModel]="car?.regNumber" name="regNumber">
           </div>
-          <div class="col s1">
+          <div class="input-container col s1">
             <label for="year">YEAR <span class="red-text">*</span></label>
             <input required id="year" type="number" min="1900" max="2050" [ngModel]="car?.year" name="year">
           </div>
