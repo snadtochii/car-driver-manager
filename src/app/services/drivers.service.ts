@@ -15,17 +15,17 @@ export class DriversService {
 
   constructor(private http: Http, private afd: AngularFireDatabase) { }
 
-  getDrivers() {
+  getDrivers(): Observable<any>{
     return this.afd.list('/drivers');
   }
-  addDriver(driver) {
+  addDriver(driver):Observable<any> {
     return this.http.post(this.dbUrl + '/drivers.json', driver);
   }
   deleteDriver(driver) {
     let carKeys = driver.cars;
     let driverKey = driver.$key;
 
-    return this.http.delete(this.dbUrl + '/drivers/' + driverKey + '.json').subscribe(() => {
+    this.http.delete(this.dbUrl + '/drivers/' + driverKey + '.json').subscribe(() => {
       let tasks$ = [];
       for (var key in carKeys) {
         if (carKeys.hasOwnProperty(key)) {
